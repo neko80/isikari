@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>アーカイブズ論 課題③ - デジタルアーカイブ機関紹介</title>
+  <style>
+    /* --- 1. theme.css (Morphous Ice Cave) の色定義 --- */
+    :root {
+      --background: oklch(0.985 0.008 241.7);
+      --foreground: oklch(0.167 0.019 237.7);
+      --card: oklch(0.929 0.018 232.5);
+      --card-foreground: oklch(0.167 0.019 237.7);
+      --popover: oklch(0.929 0.018 232.5);
+      --popover-foreground: oklch(0.167 0.019 237.7);
+      --primary: oklch(0.845 0.084 226.7);
+      --primary-foreground: oklch(0.985 0.008 241.7);
+      --secondary: oklch(0.952 0.013 233.7);
+      --secondary-foreground: oklch(0.306 0.023 240.9);
+      --muted: oklch(0.945 0.016 233.0);
+      --muted-foreground: oklch(0.306 0.023 240.9);
+      --accent: oklch(0.742 0.122 213.0);
+      --accent-foreground: oklch(0.167 0.019 237.7);
+      --destructive: oklch(0.845 0.084 226.7);
+      --border: oklch(0.941 0.017 230.9);
+      --input: oklch(0.941 0.017 230.9);
+      --ring: oklch(0.555 0.111 230.0);
+      --chart-1: oklch(0.845 0.084 226.7);
+      --chart-2: oklch(0.555 0.111 230.0);
+      --chart-3: oklch(0.742 0.122 213.0);
+      --chart-4: oklch(0.929 0.018 232.5);
+      --chart-5: oklch(0.306 0.023 240.9);
+      --sidebar: oklch(0.949 0.014 231.2);
+      --sidebar-foreground: oklch(0.167 0.019 237.7);
+      --sidebar-primary: oklch(0.845 0.084 226.7);
+      --sidebar-primary-foreground: oklch(0.985 0.008 241.7);
+      --sidebar-accent: oklch(0.919 0.027 230.4);
+      --sidebar-accent-foreground: oklch(0.845 0.084 226.7);
+      --sidebar-border: oklch(0.941 0.017 230.9);
+      --sidebar-ring: oklch(0.555 0.111 230.0);
+      --radius: 0.5rem;
+    }
+
+    .dark {
+      --background: oklch(0.167 0.019 237.7);
+      --foreground: oklch(0.985 0.008 241.7);
+      --card: oklch(0.262 0.022 240.2);
+      --card-foreground: oklch(0.985 0.008 241.7);
+      --popover: oklch(0.262 0.022 240.2);
+      --popover-foreground: oklch(0.985 0.008 241.7);
+      --primary: oklch(0.555 0.111 230.0);
+      --primary-foreground: oklch(0.167 0.019 237.7);
+      --secondary: oklch(0.467 0.020 237.1);
+      --secondary-foreground: oklch(0.985 0.008 241.7);
+      --muted: oklch(0.467 0.020 237.1);
+      --muted-foreground: oklch(0.975 0.010 238.5);
+      --accent: oklch(0.742 0.122 213.0);
+      --accent-foreground: oklch(0.167 0.019 237.7);
+      --destructive: oklch(0.845 0.084 226.7);
+      --border: oklch(1 0 0 / 12%);
+      --input: oklch(1 0 0 / 16%);
+      --ring: oklch(0.555 0.111 230.0);
+      --chart-1: oklch(0.555 0.111 230.0);
+      --chart-2: oklch(0.845 0.084 226.7);
+      --chart-3: oklch(0.742 0.122 213.0);
+      --chart-4: oklch(0.929 0.018 232.5);
+      --chart-5: oklch(0.961 0.013 233.7);
+      --sidebar: oklch(0.233 0.021 242.9);
+      --sidebar-foreground: oklch(0.985 0.008 241.7);
+      --sidebar-primary: oklch(0.555 0.111 230.0);
+      --sidebar-primary-foreground: oklch(0.167 0.019 237.7);
+      --sidebar-accent: oklch(0.467 0.020 237.1);
+      --sidebar-accent-foreground: oklch(0.985 0.008 241.7);
+      --sidebar-border: oklch(1 0 0 / 12%);
+      --sidebar-ring: oklch(0.555 0.111 230.0);
+      --radius: 0.5rem;
+    }
+
+    /* --- 2. ページ全体のデザイン設定 --- */
+    body {
+      background-color: var(--background);
+      color: var(--foreground);
+      font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+      line-height: 1.8;
+      margin: 0;
+      padding: 2.5rem 1rem;
+    }
+
+    .container {
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    /* ヘッダー＆学生情報エリア */
+    .page-header {
+      background-color: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    }
+
+    .header-badge {
+      display: inline-block;
+      background-color: var(--primary);
+      color: var(--primary-foreground);
+      font-size: 0.8rem;
+      font-weight: bold;
+      padding: 0.2rem 0.6rem;
+      border-radius: calc(var(--radius) / 2);
+      margin-bottom: 0.5rem;
+    }
+
+    h1 {
+      margin: 0.2rem 0 1.5rem 0;
+      font-size: 1.8rem;
+      color: var(--foreground);
+    }
+
+    /* 学生情報テーブル風デザイン */
+    .student-info-card {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0.8rem;
+      background-color: var(--background);
+      border: 1px solid var(--border);
+      padding: 1rem 1.2rem;
+      border-radius: var(--radius);
+    }
+
+    .info-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .info-label {
+      font-size: 0.75rem;
+      color: var(--muted-foreground);
+      font-weight: bold;
+      margin-bottom: 0.1rem;
+    }
+
+    .info-value {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--foreground);
+    }
+
+    /* メインコンテンツ（機関紹介カード） */
+    .archive-card {
+      background-color: var(--card);
+      color: var(--card-foreground);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+    }
+
+    .card-tag {
+      font-size: 0.8rem;
+      font-weight: bold;
+      color: var(--muted-foreground);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .archive-card h2 {
+      margin: 0.3rem 0 1.2rem 0;
+      font-size: 1.5rem;
+      color: var(--foreground);
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 0.5rem;
+    }
+
+    .lead-text {
+      font-size: 1.05rem;
+      font-weight: 500;
+      background-color: var(--background);
+      padding: 1rem 1.2rem;
+      border-radius: var(--radius);
+      border-left: 3px solid var(--primary);
+      margin-bottom: 1.5rem;
+    }
+
+    .archive-card h3 {
+      font-size: 1.2rem;
+      margin: 1.8rem 0 0.8rem 0;
+      padding-left: 0.6rem;
+      border-left: 4px solid var(--primary);
+      color: var(--foreground);
+    }
+
+    .archive-card h4 {
+      display: inline-block;
+      font-size: 0.95rem;
+      background-color: var(--muted);
+      color: var(--muted-foreground);
+      padding: 0.2rem 0.6rem;
+      border-radius: calc(var(--radius) / 2);
+      margin: 1.2rem 0 0.4rem 0;
+    }
+
+    .archive-card p {
+      margin: 0.6rem 0;
+      text-align: justify;
+    }
+
+    .card-action {
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px dashed var(--border);
+      text-align: right;
+    }
+
+    .link-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background-color: var(--primary);
+      color: var(--primary-foreground);
+      text-decoration: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: var(--radius);
+      font-weight: bold;
+      font-size: 0.9rem;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .link-button:hover {
+      opacity: 0.85;
+      transform: translateY(-2px);
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--muted-foreground);
+      margin-top: 3rem;
+    }
+
+    /* スマホ用の画面調整 */
+    @media (max-width: 600px) {
+      body {
+        padding: 1rem 0.5rem;
+      }
+      .page-header, .archive-card {
+        padding: 1.2rem;
+      }
+      .student-info-card {
+        grid-template-columns: 1fr;
+      }
+      .card-action {
+        text-align: left;
+      }
+      .link-button {
+        display: block;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <!-- ヘッダー＆学生情報（記入欄） -->
+    <header class="page-header">
+      <span class="header-badge">課題提出レポート</span>
+      <h1>アーカイブズ論 課題③</h1>
+
+      <div class="student-info-card">
+        <div class="info-item">
+          <span class="info-label">大学名</span>
+          <span class="info-value">藤女子大学</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">学部・学科</span>
+          <span class="info-value">人間生活学部人間生活学科</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">氏名</span>
+          <span class="info-value">岩尾真実</span>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- 1つ目の機関 -->
+      <article class="archive-card">
+        <span class="card-tag">機関紹介 01</span>
+        <h2>北極圏ワールドアーカイブ（AWA）</h2>
+
+        <p class="lead-text">
+          北極圏ワールドアーカイブ（AWA）とは、「世界の記憶を安全に、持続可能に、そして自由に保存すること。そして、これから何世代にもわたって、誰にでもアクセス可能になること」を使命としたデータ保全施設です。
+        </p>
+
+        <h3>歴史</h3>
+        <p>　2017年にプロジェクトを開始しており、スヴァールバルにある石炭の採掘作業終了跡に施設が建設されました。2025年にはAWAが独立した団体として設立され、中立性と透明性、グローバルな管理がスタートしました。</p>
+
+        <h3>地理</h3>
+        <p>　第一次世界大戦後に締結されたスヴァールバル条約により、42か国が該周辺区域の非軍事化を宣言しています。ゆえに、スヴァールバルは地球上もっとも政治的に安定した場所の１つとなっています。</p>
+        <p>　永久凍土と低い地震活動によって、長期的に安定した環境です。データは地下150ｍ～300ｍの間にある廃炭鉱の内部にある大きな鉄製金庫に収められています。</p>
+
+        <h3>保存されているデータ</h3>
+        <div>
+          <h4>GitHub</h4>
+          <p>　世界最大のオープンソースコードリポジトリであるGitHubから、6,000以上のリポジトリが収蔵されています。LinuxおよびAndroidオペレーティングシステムのソースコード、プログラミング言語のPython、Ruby、Rust、そしてNode、V8、React、Angularといったウェブプラットフォームが含まれています。</p>
+          <p>　さらに、アーカイブにはオープンソースソフトウェアに関連する様々な情報も保管されており、ドキュメント、コミュニティの貢献、ブログ投稿、動画などが含まれます。これらの情報は、オープンソースコミュニティの歴史と文化を保存する役割を果たしています。</p>
+        </div>
+
+        <div>
+          <h4>美術品</h4>
+          <p>　ストックホルム近代美術館の作品14万点のコピーが保存されています。ノルウェーオスロ国立美術館に所蔵されているエドヴァルド・ムンクの『叫び』や、バチカン図書館の『神曲』、レンブラントの 『夜警』などが保存されています。</p>
+        </div>
+
+        <div class="card-action">
+          <a href="https://arcticworldarchive.org/" target="_blank" rel="noopener noreferrer" class="link-button">
+            Arctic World Archive 公式サイト ↗
+          </a>
+        </div>
+      </article>
+
+      <!-- 2つ目の機関 -->
+      <article class="archive-card">
+        <span class="card-tag">機関紹介 02</span>
+        <h2>World Flora Online（WFO）</h2>
+
+        <p class="lead-text">
+          World Flora Online（WFO）とは、GSPCに基づく、世界の植物種に関する最新のオープンアクセスのWebベースです。
+        </p>
+
+        <h3>歴史</h3>
+        <p>　2010年、生物多様性に関する国連条約の更新された植物保護のためのグローバル戦略（GSPC）に基づき、2012年1月に米国ミズーリ州セントルイスで、ミズーリ植物園、ニューヨーク植物園、エジンバラ王立植物園、キュー王立植物園の4つの機関が、植物保護のためのグローバルパートナーシップ（GPPC）が主導し、2020年までにGSPCターゲット1を達成する方法について話し合いました。その結果、World Flora Onlineの範囲と内容の概要が決定され、World Flora Online Consortiumが発足しました。2020年6月時点で、43の機関と組織が合意しています。</p>
+
+        <h3>所在地</h3>
+        <p>　現在はスイスに設置され、ジュネーブ植物園に本部を置いています。WFOは、世界で最も活発な生物多様性と保全活動の拠点の一つに位置しているため、国際自然保護連合(IUCN)、ジュネーブ環境ネットワーク、絶滅危惧野生動植物国際取引条約(CITESなど)など、ジュネーブを拠点とする主要な国際機関との協力強化促進が重要視されています。</p>
+
+        <h3>植物のデータ</h3>
+        <div>
+          <h4>Accepted Species（正名）</h4>
+          <p>　約37万～38万種の植物が、現在、独立した種として正式に記録されています。</p>
+        </div>
+
+        <div>
+          <h4>Synonyms（異名）</h4>
+          <p>　約120万件あります。過去の学名の重複や再分類によって同義語となった植物の名称の記録数です。</p>
+        </div>
+
+        <div>
+          <h4>Total Scientific Names（登録学名総数）</h4>
+          <p>　約150万～160万件以上あります。正名、異名、および未確定の名称（Unresolved names）を含む全体の学名数です。</p>
+        </div>
+
+        <div class="card-action">
+          <a href="https://www.worldfloraonline.org/" target="_blank" rel="noopener noreferrer" class="link-button">
+            World Flora Online 公式サイト ↗
+          </a>
+        </div>
+      </article>
+    </main>
+
+
+
+  </div>
+</body>
+</html>
