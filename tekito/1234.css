@@ -1,139 +1,135 @@
 @charset "UTF-8";
+
+/* --- Eucalyptus テーマの色の定義 --- */
+:root {
+  --background: oklch(0.972 0.003 128.5);
+  --foreground: oklch(0.341 0.040 221.7);
+  --card: oklch(1.000 0.000 89.9);
+  --card-foreground: oklch(0.341 0.040 221.7);
+  --primary: oklch(0.725 0.042 163.5);
+  --primary-foreground: oklch(0.972 0.003 128.5);
+  --secondary: oklch(0.988 0.001 106.4);
+  --secondary-foreground: oklch(0.374 0.019 157.5);
+  --accent: oklch(0.743 0.069 64.2);
+  --border: oklch(0.978 0.003 228.8);
+  --radius: 0.5rem;
+}
+
+/* ダークモード用の設定（お好みで使用） */
+.dark {
+  --background: oklch(0.341 0.040 221.7);
+  --foreground: oklch(0.972 0.003 128.5);
+  --card: oklch(0.363 0.023 187.7);
+  --card-foreground: oklch(0.972 0.003 128.5);
+  --primary: oklch(0.793 0.020 235.8);
+  --primary-foreground: oklch(0.341 0.040 221.7);
+  --secondary: oklch(0.511 0.015 164.4);
+  --secondary-foreground: oklch(0.972 0.003 128.5);
+  --accent: oklch(0.743 0.069 64.2);
+  --border: oklch(1 0 0 / 12%);
+}
+/* -------------------------------- */
+
+/* 全体の基本設定 */
 body {
-	background: #F7F7F7;
+	background: var(--background); /* テーマの背景色を使用 */
+	color: var(--foreground);      /* テーマの文字色を使用 */
 	margin: 0;
 	padding: 0;
-	line-height: 1.6;
+	line-height: 1.8; /* 行間を少し広くして読みやすく */
+    font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
 }
-#outer {
-}
+
+/* ヘッダー */
 header {
-	padding: 10px 20px;
-	height: 94px;
+	padding: 20px 20px;
 	position: relative;
 	z-index: 4;
-    background: linear-gradient(to bottom, rgba(110, 0, 0, 1), rgba(110, 0, 0, 1));background-size: auto;
+    background: var(--primary); /* 赤いグラデーションからテーマカラーに変更 */
+    color: var(--primary-foreground);
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
+
 #header-inner {
 	margin: 0 auto;
 	max-width: 1000px;
 }
-.description {
-	padding-left: 10px;
-	line-height: 1.2;
-}
+
+/* メインコンテンツを囲む箱（カード風） */
 #container {
-	margin: 0 auto;
-	max-width: 1000px;
-	background-color: #fff;
+	margin: 30px auto;
+	max-width: 900px;
+	background-color: var(--card);
+    color: var(--card-foreground);
 	position: relative;
 	z-index: 1;
-	padding: 20px;
+	padding: 40px;
+    border-radius: var(--radius);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05); /* ふんわりとした影を追加 */
 }
-#text {
-	padding: 0 20px 0 0;
-}
-ul {
-	margin: 0 0 0 1em;
-	padding: 0;
-}
-li {
-	list-style: none;
-}
+
+/* テキスト周り */
 p {
-	margin: 1em 0;
+	margin: 1.2em 0;
 }
-img {
-	max-width: 100%;
-	height: auto;
-	border: 0;
-}
-hr {
-	border-width: 1px 0 0 0;
-	border-style: solid;
-	border-color: #ccc;
-	height: 1px;
-}
-body a {
-	font-weight: normal;
-}
+
+/* 見出しの装飾 */
 h1 {
-	color: #fff;
+	color: var(--primary-foreground);
 	font-size: 28px;
-	padding: 20px 0 0 0;
 	margin: 0;
 }
-h1 a {
-	font-weight: bold;
-	color: #fff;
-	text-decoration: none;
+
+h2 {
+	font-size: 26px;
+    color: var(--primary);
+	margin: 2em 0 1em 0;
+	padding: 0 0 10px 0;
+    border-bottom: 2px solid var(--border); /* 下線を追加 */
 }
-h1 a:hover {
-	font-weight: bold;
-	color: #ffffff;
-	text-decoration: underline;
+
+h3 {
+	font-size: 22px;
+    color: var(--secondary-foreground);
+    background-color: var(--secondary); /* 薄い背景色を追加 */
+	margin: 1.5em 0 1em 0;
+	padding: 12px 15px;
+    border-left: 5px solid var(--accent); /* 左側にアクセントの線を追加 */
+    border-radius: 4px;
 }
-h2, h3, h4 {
-	font-size: 28px;
-	margin: 4px 0 0 0;
-	padding: 9px 0 7px 0;
+
+h4 {
+	font-size: 18px;
+    color: var(--foreground);
+	margin: 1.5em 0 0.5em 0;
+	padding: 0;
+    font-weight: bold;
 }
-main {
-}
-aside {
-}
-.side-title {
-	background: #f1f1f1;
-	font-weight: bold;
-	border: 1px solid #ccc;
-	margin-bottom: 10px;
-	padding: 10px 20px;
-    border-radius:3px;
-}
-.side {
-	margin: 0 0 10px 0;
-	padding: 2px 8px 8px 7px;
-}
-aside a {
-    color: #3b5998;
-    text-decoration: none;
-  }
-aside a:hover {
-	color:#0000ee;
-    text-decoration: underline;
-  }
+
+/* フッター */
 footer {
-    background-color: #fff;
-	padding-top: 20px;
-	font-size: 12px;
-	height: 100px;
+    background-color: var(--background);
+	padding: 30px 20px;
+	font-size: 14px;
 	clear: both;
 	text-align: center;
+    color: var(--secondary-foreground);
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
 }
-blockquote {
-	border: 1px solid #ccc;
-	padding: 5px;
-	margin: 10px;
+footer p {
+    margin: 0.3em 0;
 }
-@media screen and (max-width: 767px) {
-#header-inner {
-	margin: 0;
-	max-width: 100%;
-}
-  main {
-    width: 100%;
-  }
 
-  aside {
-    width: 100%;
-  }
+/* スマホ用の設定 */
+@media screen and (max-width: 767px) {
   #container {
-    display: block;
-    	margin: 0;
-	max-width: 100%;
+    margin: 15px;
+    padding: 20px;
+    border-radius: var(--radius);
   }
-  h1 {
-    font-size: 24px;
-    padding: 10px 0;
-  }
+  h1 { font-size: 22px; }
+  h2 { font-size: 20px; }
+  h3 { font-size: 18px; }
 }
